@@ -5,28 +5,39 @@ import './App.css';
 
 
 function App() {
-
   
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [isXNext, setIsXNext] = useState(true);  
+
+  const rows = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8]
+  ];
+
   return (
+    
     <div className="container">
       <div className="game">
         <h1>Tic Tac Toe</h1>
         <div className="game-board">
-          <div className="board-row">
-            {SquareInPlay(0)}
-            {SquareInPlay(1)}
-            {SquareInPlay(2)}
-          </div>
-          <div className="board-row">
-            {SquareInPlay(3)}
-            {SquareInPlay(4)}
-            {SquareInPlay(5)}
-          </div>
-          <div className="board-row">
-            {SquareInPlay(6)}
-            {SquareInPlay(7)}
-            {SquareInPlay(8)}
-          </div>
+          {rows.map((row, index) => (
+            <div key={index}>
+              {row.map((cell, ind) => (
+                <SquareInPlay
+                  key={ind} 
+                  value={squares[cell]}
+                  onClick={
+                    () => {
+                      const nextMove = squares.slice();
+                      nextMove[cell] = isXNext ? 'X' : 'O';
+                      setSquares(nextMove);
+                      setIsXNext(!isXNext);
+                  }}
+                />
+              ))}
+            </div>         
+          ))}
 
         </div>
         <div className="next-move">

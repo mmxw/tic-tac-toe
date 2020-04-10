@@ -1,21 +1,15 @@
-import React, {useState} from 'react';
-import Square from "./Square";
+import React from 'react';
 
-function SquareInPlay(i) {
-  const [squares, setSquares] = useState(Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState(true);  
 
-  const handleClick = () => {
-    const nextMove = squares.slice();
-    nextMove[i] = isXNext ? 'X' : 'O';
-    setSquares(nextMove);
-    setIsXNext(!isXNext);
-  }
+function SquareInPlay({ value, onClick}) {
+  
   return (   
-    <Square 
-      value={squares[i]}
-      onClick={handleClick}    
-    />
+    <button
+      className="square" 
+      onClick={onClick}    
+    >
+      {value}
+    </button>
   
   )
 }
