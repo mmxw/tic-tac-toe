@@ -7,7 +7,7 @@ import './App.css';
 function App() {
   
   const [squares, setSquares] = useState(Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState(true);  
+  const [isXNext, setIsXNext] = useState(true); 
 
   const rows = [
     [0, 1, 2],
@@ -15,6 +15,37 @@ function App() {
     [6, 7, 8]
   ];
 
+  const winningConditions = [
+    [0, 1, 2],
+    [0, 4, 8], 
+    [0, 3, 6], 
+    [1, 4, 7], 
+    [2, 5, 8],
+    [3, 4, 5],
+    [6, 7, 8],
+    [2, 4, 6]
+  ];
+
+  function isFullBoard() {
+    const filledSquares = squares.filter(square => square !== null);
+    return filledSquares.length === 9 ? true : false
+  }
+
+  
+  function findWinner() {
+    for (let i=0; i<winningConditions.length; i++) {
+      const [a, b, c] = winningConditions[i];
+      if (squares[a] && squares[a]===squares[b] && squares[a]===squares[c]) {
+        console.log(squares[a]);
+        console.log(squares[b]);
+        console.log(squares[c]);
+        return `${squares[a]} has won!`
+      }
+  }
+  if (isFullBoard()) return `it is a draw`;
+}
+
+ 
   return (
     
     <div className="container">
@@ -41,7 +72,10 @@ function App() {
 
         </div>
         <div className="next-move">
-          <h3>Next Move: {} </h3>  
+          <h3>Next Move: { isXNext ? 'X' : 'O' } </h3>  
+        </div>
+        <div className="next-move">
+          {findWinner()} 
         </div>
         <div>
           <button className="next-move" type="reset">
