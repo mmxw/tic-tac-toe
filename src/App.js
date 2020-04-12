@@ -36,15 +36,15 @@ function App() {
     for (let i=0; i<winningConditions.length; i++) {
       const [a, b, c] = winningConditions[i];
       if (squares[a] && squares[a]===squares[b] && squares[a]===squares[c]) {
-        console.log(squares[a]);
-        console.log(squares[b]);
-        console.log(squares[c]);
         return `${squares[a]} has won!`
       }
   }
   if (isFullBoard()) return `it is a draw`;
 }
 
+function handleReset () {
+  window.location.reload()
+}
  
   return (
     
@@ -78,7 +78,7 @@ function App() {
           {findWinner()} 
         </div>
         <div>
-          <button className="next-move" type="reset">
+          <button className="next-move" type="reset" onClick={handleReset}>
             <h3> Play Again! </h3>
           </button>
         </div>
